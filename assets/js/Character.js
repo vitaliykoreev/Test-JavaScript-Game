@@ -80,7 +80,14 @@ export class Character extends GameObject {
             (
                 this.getCollision().y + this.getCollision().height <= gameObject.getCollision().y + gameObject.getCollision().height &&
                 this.getCollision().y >= gameObject.getCollision().y
-            ))
+            )
+            // ||
+            // (
+            //     this.getCollision().y + this.getCollision().height >= gameObject.getCollision().y + gameObject.getCollision().height &&
+            //     this.getCollision().y > gameObject.getCollision().y &&
+            //     this.getCollision().y < gameObject.getCollision().y + gameObject.getCollision().height
+            // )
+            )
         );
     }
 
@@ -100,25 +107,6 @@ export class Character extends GameObject {
         this.position.x += this.positionDelta.x;
         this.position.y += this.positionDelta.y;
 
-        // Is player on any object
-        // for (let i = 0; i < objects.length; i++) {
-        //     if (this.isOnObject(objects[i])) {
-        //         //console.log(objects[i]);
-        //         this.position.y = objects[i].getCollision().y + objects[i].getCollision().height + 1;
-        //         this.positionDelta.y = 0;
-        //         this.isOnGround = true;
-        //         this.element.classList.remove("jump");
-        //         this.element.classList.remove("fall");
-        //         break;
-        //     } else {
-        //         this.isOnGround = false;
-        //
-        //         if (!this.element.classList.contains("jump")) {
-        //             this.element.classList.add("fall");
-        //         }
-        //     }
-        // }
-
         for (let i = 0; i < objects.length; i++) {
             if (this.isCollisionX(objects[i])) {
                 if (this.direction === 1) {
@@ -135,22 +123,7 @@ export class Character extends GameObject {
 
         // Is player collided any object
         for (let i = 0; i < objects.length; i++) {
-            // if (this.isCollisionX(objects[i]) && this.isCollisionX(objects[i])) {
-            //     alert("PIZDETS");
-            //     break;
-            // }
-
             if (this.isCollision(objects[i])) {
-                //console.log(objects[i]);
-                // if (this.direction === 1) {
-                //     this.position.x = objects[i].getCollision().x - this.getCollision().width - this.speed;
-                // } else if (this.direction === -1) {
-                //     this.position.x = objects[i].getCollision().x + objects[i].getCollision().width;
-                // }
-                //
-                // this.element.classList.remove("walk");
-                // this.positionDelta.x = 0;
-
                 if (this.isOnObject(objects[i])) {
                     this.position.y = objects[i].getCollision().y + objects[i].getCollision().height;
                     this.positionDelta.y = 0;
@@ -169,9 +142,13 @@ export class Character extends GameObject {
                         this.positionDelta.x = 0;
 
                     } else {
-                        this.isOnGround = false;
-                        this.position.y = objects[i].getCollision().y - this.getCollision().height;
-                        this.positionDelta.y = 0;
+                        //this.isOnGround = false;
+
+                        if (this.getCollision().y + this.getCollision().height <= objects[i].getCollision().y + this.speed) {
+                            this.isOnGround = false;
+                            this.position.y = objects[i].getCollision().y - this.getCollision().height;
+                            this.positionDelta.y = 0;
+                        }
                     }
                 }
 

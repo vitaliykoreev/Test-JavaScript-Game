@@ -53,9 +53,8 @@ window.addEventListener('DOMContentLoaded', () => {
         new Block(200, 50, {x: 450, y: 150}),
         new Block(200, 50, {x: 1250, y: 120}),
         new Block(350, 50, {x: 700, y: 280}),
-        new Block(50, 50, {x: 600, y: 210}),
+        new Block(100, 50, {x: 600, y: 210}),
         new Pipe(70, 70, {x: 100, y: 100}),
-        new Pipe(70, 120, {x: 170, y: 100}),
         new Block(50, 500, {x: -40, y: 100}), // Left wall
         new Block(50, 500, {x: window.innerWidth - 10, y: 100}) // Right wall
     ];
