@@ -1,0 +1,206 @@
+@charset "utf-8";
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    font-family: Montserrat, sans-serif;
+}
+
+.overlay {
+    background: rgba(0, 0, 0, .5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlay nav {
+    display: flex;
+    width: 100%;
+    max-width: 300px;
+}
+
+.overlay nav a {
+    display: block;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+    height: 50px;
+    line-height: 50px;
+    background: green;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.game.paused .overlay {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 999;
+}
+
+.scene {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: #09f;
+    overflow: hidden;
+}
+
+.game.paused .scene {
+    filter: blur(5px);
+}
+
+.ground {
+    background: saddlebrown;
+}
+
+.gameObject {
+    position: absolute;
+    display: none;
+}
+
+.gameObject.border-visible {
+    border: 1px solid green;
+}
+
+.character {
+    background-image: url(../images/actor/jane/rest.svg);
+    background-position: center bottom;
+    background-repeat: no-repeat;
+}
+.character.walk {
+    animation-name: walk;
+    animation-duration: .45s;
+    animation-timing-function: step-end;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+}
+.character.jump {
+    animation-name: jump;
+    animation-duration: 1s;
+    animation-timing-function: step-end;
+    animation-fill-mode: both;
+    animation-iteration-count: 1;
+}
+.character.fall {
+    background-image: url(../images/actor/jane/jump_8.svg);
+}
+
+.gameObject.block {
+    background: url(../images/world/brick.png) repeat;
+    background-size: contain;
+}
+
+.gameObject.gameObject-ground {
+    background: url(../images/world/ground.png) repeat;
+    background-size: contain;
+}
+
+.gameObject.gameObject-pipe {
+    background: transparent;
+}
+.gameObject.gameObject-pipe:after, .gameObject.gameObject-pipe:before {
+    background: linear-gradient(to right, darkgreen 5%, green 15%, lightgreen 80%, green);
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.gameObject.gameObject-pipe:after {
+    content: '';
+    width: 80%;
+    height: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+.gameObject.gameObject-pipe:before {
+    content: '';
+    width: 100%;
+    height: 20px;
+    z-index: 2;
+    border: 1px solid green;
+}
+
+.gameObject .collision {
+    position: absolute;
+}
+.gameObject .collision.collision-visible {
+    border: 1px solid red;
+}
+
+/*.character.walk::after {*/
+/*    content: 'Я УЖЕ ЗАЕБАЛАСЬ ИДТИ';*/
+/*    position: absolute;*/
+/*    background: #fff;*/
+/*    border-radius: 10px;*/
+/*    padding: 10px;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    transform: translate(-50%, -100%);*/
+/*    white-space: nowrap;*/
+/*}*/
+
+@keyframes walk {
+    0% {
+        background-image: url(../images/actor/jane/walk_1.svg);
+    }
+    33% {
+        background-image: url(../images/actor/jane/walk_2.svg);
+    }
+    66% {
+        background-image: url(../images/actor/jane/walk_3.svg);
+    }
+    100% {
+        background-image: url(../images/actor/jane/walk_4.svg);
+    }
+}
+
+@keyframes jump {
+    0% {
+        background-image: url(../images/actor/jane/jump_2.svg);
+    }
+    10% {
+        background-image: url(../images/actor/jane/jump_3.svg);
+    }
+    20% {
+        background-image: url(../images/actor/jane/jump_4.svg);
+    }
+    30% {
+        background-image: url(../images/actor/jane/jump_5.svg);
+    }
+    40% {
+        background-image: url(../images/actor/jane/jump_6.svg);
+    }
+    50% {
+        background-image: url(../images/actor/jane/jump_7.svg);
+    }
+    60% {
+        background-image: url(../images/actor/jane/jump_8.svg);
+    }
+    70% {
+        background-image: url(../images/actor/jane/jump_9.svg);
+    }
+    80% {
+        background-image: url(../images/actor/jane/jump_4.svg);
+    }
+    90% {
+        background-image: url(../images/actor/jane/jump_3.svg);
+    }
+    100% {
+        background-image: url(../images/actor/jane/jump_2.svg);
+    }
+}
