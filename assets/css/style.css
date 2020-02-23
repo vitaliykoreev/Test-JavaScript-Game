@@ -41,10 +41,10 @@
     text-transform: uppercase;
 }
 
-.game.paused .overlay {
+.game.paused:not(.builder) .overlay {
     opacity: 1;
     pointer-events: auto;
-    z-index: 999;
+    z-index: 9999;
 }
 
 .scene {
@@ -55,12 +55,26 @@
     right: 0;
     width: 100%;
     height: 100%;
-    background: #09f;
+    background: linear-gradient(to bottom, #09f, #99f);
     overflow: hidden;
 }
 
-.game.paused .scene {
+.game.paused:not(.builder) .scene {
     filter: blur(5px);
+}
+
+#button-builder-mode {
+    position: fixed;
+    width: 100px;
+    top: 30px;
+    right: 30px;
+    z-index: 999;
+    background: green;
+    text-align: center;
+    color: #fff;
+    height: 50px;
+    line-height: 50px;
+    text-decoration: none;
 }
 
 .ground {
@@ -83,7 +97,7 @@
 }
 .character.walk {
     animation-name: walk;
-    animation-duration: .45s;
+    animation-duration: .3s;
     animation-timing-function: step-end;
     animation-fill-mode: both;
     animation-iteration-count: infinite;
@@ -102,6 +116,14 @@
 .gameObject.block {
     background: url(../images/world/brick.png) repeat;
     background-size: contain;
+}
+.gameObject.block-placeholder {
+    opacity: .3;
+}
+
+.gameObject .controls {
+    position: absolute;
+
 }
 
 .gameObject.gameObject-ground {
@@ -135,24 +157,19 @@
     border: 1px solid green;
 }
 
+.gameObject.gameObject-cloud {
+    background: url(../images/world/cloud.svg) center center no-repeat;
+    background-size: contain;
+    pointer-events: none;
+}
+
 .gameObject .collision {
     position: absolute;
+    pointer-events: none;
 }
 .gameObject .collision.collision-visible {
     border: 1px solid red;
 }
-
-/*.character.walk::after {*/
-/*    content: 'Я УЖЕ ЗАЕБАЛАСЬ ИДТИ';*/
-/*    position: absolute;*/
-/*    background: #fff;*/
-/*    border-radius: 10px;*/
-/*    padding: 10px;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    transform: translate(-50%, -100%);*/
-/*    white-space: nowrap;*/
-/*}*/
 
 @keyframes walk {
     0% {

@@ -81,6 +81,16 @@ export class Character extends GameObject {
                 this.getCollision().y + this.getCollision().height <= gameObject.getCollision().y + gameObject.getCollision().height &&
                 this.getCollision().y >= gameObject.getCollision().y
             )
+            ||
+            (
+                this.getCollision().y + this.getCollision().height <= gameObject.getCollision().y + gameObject.getCollision().height &&
+                this.getCollision().y + this.getCollision().height >= gameObject.getCollision().y + this.speed
+            )
+            // ||
+            // (
+            //     this.getCollision().y + this.getCollision().height > gameObject.getCollision().y + gameObject.getCollision().height &&
+            //     this.getCollision().y <= gameObject.getCollision().y + gameObject.getCollision().height
+            // )
             // ||
             // (
             //     this.getCollision().y + this.getCollision().height >= gameObject.getCollision().y + gameObject.getCollision().height &&
